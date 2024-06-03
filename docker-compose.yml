@@ -1,0 +1,55 @@
+version: '3'
+services:
+    meshcentral:
+        restart: always
+        container_name: meshcentral
+        image: ghcr.io/ylianst/meshcentral:latest
+        ports:
+            - 8086:443
+        environment:
+            - HOSTNAME=             # Domain name
+            - REVERSE_PROXY=       # IP Proxy Server
+            - REVERSE_PROXY_TLS_PORT=443
+            - IFRAME=false
+            - ALLOW_NEW_ACCOUNTS=false
+            - WEBRTC=false
+            - TZ=Asia/Ho_Chi_Minh
+        volumes:
+            - ./meshcentral:/opt/meshcentral/meshcentral-data
+            - ./meshcentral_files:/opt/meshcentral/meshcentral-files
+            - ./meshcentral_backup:/opt/meshcentral/meshcentral-backups
+            - ./meshcentral_web:/opt/meshcentral/meshcentral-web
+    app:
+        image: 'jc21/nginx-proxy-manager:latest'
+        restart: unless-stopped
+        container_name: nginx_app
+        ports:
+            - '80:80'
+            - '443:443'
+            - '8181:81'
+        environment:
+          DB_MYSQL_HOST: "db"
+          DB_MYSQL_PORT: 3306
+          DB_MYSQL_USER: "npm"
+          DB_MYSQL_PASSWORD: "npm"
+          DB_MYSQL_NAME: "npm"
+        volumes:
+          - ./data:/data
+          - ./letsencrypt:/etc/letsencrypt
+        depends_on:
+          - db
+
+    db:
+        image: 'jc21/mariadb-aria:latest'
+        restart: unless-stopped
+        container_name: nginx_db
+        environment:
+          MYSQL_ROOT_PASSWORD: 'npm'
+          MYSQL_DATABASE: 'npm'
+          MYSQL_USER: 'npm'
+          MYSQL_PASSWORD: 'npm'
+          MARIADB_AUTO_UPGRADE: '1'
+          PUID: 1000
+          PGID: 1000
+        volumes:
+          - ./mysql:/var/lib/mysql

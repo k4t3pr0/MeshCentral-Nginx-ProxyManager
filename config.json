@@ -1,0 +1,47 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Ylianst/MeshCentral/master/meshcentral-config-schema.json",
+  "settings": {
+    "plugins":{"enabled": false},
+    "_mongoDb": null,
+    "cert": "example.com",
+    "_WANonly": true,
+    "_LANonly": true,
+    "sessionKey": "VAKZV596UFVAA0RIRW633JWGIR5VKATM87C77MNDL47BKHKD",
+    "port": 443,
+    "_aliasPort": 443,
+    "redirPort": 80,
+    "_redirAliasPort": 80,
+    "AgentPong": 300,
+    "TLSOffload": false,
+    "SelfUpdate": false,
+    "AllowFraming": false,
+    "WebRTC": false,
+    "AgentTimeStampServer": false
+  },
+  "domains": {
+    "": {
+      "title": "Trend Micro",
+      "title2": "© 2024",
+      "newAccounts": false,
+      "certUrl": "https://example.com:443/",
+      "geoLocation": true,
+      "cookieIpCheck": false,
+      "mstsc": true,
+      "agentCustomization": {
+      "displayName": "Trend Micro®",
+      "description": "Trend Micro",
+      "companyName": "Trend Micro",
+      "serviceName": "Trend Micro",
+      "fileName": "Trend Micro",
+      "image": "logo.png",
+      "agentFileInfo": {
+      "icon": "icon.ico",
+      "filedescription": "Trend Micro",
+      "legalcopyright": "Trend Micro®",
+      "productname": "Trend Micro®"
+        }
+      }
+    }
+  }
+}
+
