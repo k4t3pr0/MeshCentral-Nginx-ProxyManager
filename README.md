@@ -1,0 +1,2 @@
+# MeshCentral-Nginx-ProxyManager
+ 
